@@ -38,11 +38,12 @@
 
   </head>
   <body class="skin-green">
+
     <div class="wrapper">
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo"><b>VIAS</b>libres</a>
+        <a href="{{url('inicio')}}" class="logo"><b>VIAS</b>libres</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -60,15 +61,15 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{asset('dist/img/usuario.jpg')}}" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">Usuario de prueba</span>
+                  <img src="/imagenes/personas/{{ Auth::user()->imagen }}" class="user-image" alt="User Image"/>
+                  <span class="hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="{{asset('dist/img/usuario.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="/imagenes/personas/{{ Auth::user()->imagen }}" class="img-circle" alt="User Image" />
                     <p>
-                      Usuario de prueba - Web Developer
+                      {{ Auth::user()->name }} - Web Developer
                       <small>Miembro desde 26/09/2017</small>
                     </p>
                   </li>
@@ -80,7 +81,11 @@
                       <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Salir</a>
+                      <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Salir</a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                      </form>
                     </div>
                   </li>
                 </ul>
@@ -96,10 +101,10 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{asset('dist/img/usuario.jpg')}}" class="img-circle" alt="User Image" />
+              <img src="/imagenes/personas/{{ Auth::user()->imagen }}" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>Usuario Prueba</p>
+              <p>{{ Auth::user()->name }}</p>
 
               
             </div>
@@ -111,30 +116,36 @@
           <ul class="sidebar-menu">
             <li class="header">MENU DE NAVEGACION</li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-laptop"></i> <span>Administracion</span> <i class="fa fa-angle-left pull-right"></i>
+              <a href="{{url('administracion/incidentes')}}">
+                <i class="fa fa-laptop"></i> <span>Incidentes</span> 
               </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Usuarios </a></li>
-              </ul>
+              <!--<i class="fa fa-angle-left pull-right"></i><ul class="treeview-menu">
+                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Bandeja de incidentes </a></li>
+              </ul>-->
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="{{url('administracion/mapa')}}">
                 <i class="fa fa-files-o"></i>
-                <span>Carreteras</span><i class="fa fa-angle-left pull-right"></i>
+                <span>Mapa</span>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> prueba1</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> prueba2</a></li>
+              <!--<i class="fa fa-angle-left pull-right"></i><ul class="treeview-menu">
+                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Vista panorámica</a></li>
                 
-              </ul>
+              </ul>-->
             </li>
-            <li><a href="#"><i class="fa fa-book"></i> Documentacion</a></li>
+            <li class="treeview">
+              <a href="{{url('administracion/usuario')}}">
+                <i class="fa fa-book"></i>
+                <span>Administrar Usuarios</span>
+              </a>
+            </li>
 
-            <li class="header">EXTRAS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-danger"></i> Important</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-warning"></i> Warning</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-info"></i> Information</a></li>
+            <!--<li><a href="#"><i class="fa fa-book"></i> Documentacion</a></li>-->
+
+            <li class="header">CLASIFICACIÓN</li>
+            <li><a href="#"><i class="fa fa-circle-o text-danger"></i> Importantes </a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-warning"></i> Peligrosos </a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-info"></i> Información </a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -207,5 +218,6 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('dist/js/demo.js')}}" type="text/javascript"></script>
+    
   </body>
 </html>

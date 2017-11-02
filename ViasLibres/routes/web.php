@@ -12,9 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/inicio',function(){
-	return view('inicio');
+	if($this->middleware('auth')){
+		return view('inicio');
+	}
+
 });
+
+Auth::routes();
+Route::get('/mapa', 'MapaController@maps');
+Route::get('/home', 'HomeController@index')->name('home');
+//LOGIN
+Route::auth();
+
+Route::resource('administracion/usuario','UsuarioController');
+Route::resource('administracion/incidentes','IncidenteController');
+

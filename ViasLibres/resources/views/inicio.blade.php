@@ -19,15 +19,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" width="50" >
       <div class="item active">
-        <center><img class="img-responsive" src="http://portal.andina.com.pe/EDPfotografia3/Thumbnail/2016/06/28/000363509W.jpg" alt="Nevados Peru" style="width:100%; height: 380px ;"></center>
+        <center><img class="img-responsive" src="http://portal.andina.com.pe/EDPfotografia3/Thumbnail/2016/06/28/000363509W.jpg" alt="Nevados Peru" style="width:100%; height: 420px ;"></center>
       </div>
 
       <div class="item">
-        <center><img class="img-responsive" src="http://img.inforegion.pe.s3.amazonaws.com/wp-content/uploads/2015/05/vias-junin.jpg" alt="Vias Junin" style="width:100%; height: 380px;"></center>
+        <center><img class="img-responsive" src="http://img.inforegion.pe.s3.amazonaws.com/wp-content/uploads/2015/05/vias-junin.jpg" alt="Vias Junin" style="width:100%; height: 420px;"></center>
       </div>
     
       <div class="item">
-        <center><img class="img-responsive" src="http://portal.andina.com.pe/EDPfotografia/Thumbnail/2013/12/14/000227772W.jpg" alt="Carretera andina" style="width:100%;height: 380px; "></center>
+        <center><img class="img-responsive" src="http://portal.andina.com.pe/EDPfotografia/Thumbnail/2013/12/14/000227772W.jpg" alt="Carretera andina" style="width:100%;height: 420px; "></center>
       </div>
     </div>
 
