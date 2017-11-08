@@ -23,11 +23,12 @@ Route::get('/inicio',function(){
 });
 
 Auth::routes();
-Route::get('/mapa', 'MapaController@maps');
+//Route::get('administracion/mapa', 'MapaController@maps');
 Route::get('/home', 'HomeController@index')->name('home');
 //LOGIN
 Route::auth();
 
 Route::resource('administracion/usuario','UsuarioController');
 Route::resource('administracion/incidentes','IncidenteController');
+Route::resource('administracion/mapa','MapaController');
 

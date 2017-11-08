@@ -1,139 +1,183 @@
 @extends ('principal.principal')
 
 @section ('contenido')
-<div class="row">
+
+  <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="table-responsive" >
-      <table class="table table-striped table-bordered table-condensed table-hover">
-      <tr>
-      	
-      	<div id="mapa" style="width:700px; height:500px">
-      		--Aqui mapa--
+            <br>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <table class="table table-bordered table-condensed table-striped" style="background-color: white;" >
+                  <strong>BUSCAR INCIDENTES </strong>
+                  <br>
+                  <br>
+                  BUSCAR POR LUGAR <br><br><input type="text" name="entrada_datos" id="mapsearch" size="50">
+                  <br>
+                  <br>
+                  BUSCAR POR INCIDENTE<br><br>
+                  
+                  <!--<p id="total"></p>
+                  <div class="form-group">
+                  <h2>Selecccione opcion : </h2>
+                  <select class="form-control">
+                  <option id="op1">Alerta</option>
+                  <option id="op2">Medio</option>
+                  <option id="op3">Leve</option>
+                  </select>
+                  </div>
 
-      	</div>
-            <input type="text" name="entrada_datos" id="mapsearch" size="50">
-            <div id="mp" style="width:700px; height:500px">Hola</div>
-      	<script type="text/javascript">
-      		
+                  <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Seleccione una opción
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Alerta</a></li>
+                    <li><a href="#">Medio</a></li>
+                    <li><a href="#">Leve</a></li>
+                  </ul>
+                  </div>-->
+                  <div>
+                        <thead class="info">
+                        <th>Id</th>
+                        <th>Longitud</th>
+                        <th>Latitud</th>
+                        <th>Opcion</th>
+                        </thead>
+                        @foreach ($incidentes as $inc)
+                        <tr class="info">
+                        <td>{{$inc ->id}}</td>
+                        <td>{{$inc ->long_location}}</td>
+                        <td>{{$inc ->lat_location}}</td>
+                        <td>
+                              <button class="btn btn-danger" onclick="myfunction({{$inc ->long_location}},{{$inc ->lat_location}},{{$inc ->id}});">Ver mapa</button>
+                        </td>
+                        </tr>
+                        @endforeach
+                  </div>
+            </table>
+            {{ $incidentes->render() }}
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                  <center><div id="mp" style="width:600px; height:500px"><img src="../imagenes/extras/mapa_peru.jpg" width="600px" height="500px"></div></center>
+            </div>
 
 
-      		//PARA EL MAPA
-      		navigator.geolocation.getCurrentPosition(fn_ok,fn_error);
+            <script type="text/javascript">
 
-      		
-      		//var divMApa =$('mapa')
-      		function fn_error(){
-      				divMapa.innerHTML = 'Hubo problema en la solicitud de los datos';
-      		}
-
-      		function fn_ok(respuesta){
-                              
-                              var divMapa = document.getElementById('mapa');
-      				//mostrar_objeto(respuesta.coords);
-      				//divMapa.innerHTML = 'Los permisos para acceso fueron dados';
-      				var lon=respuesta.coords.longitude;
-      				var lat=respuesta.coords.latitude;
-
-      				var gLatLon = new google.maps.LatLng(lat,lon);
-      				var objConfig = {
-      					zoom:17,
-      					center:gLatLon
-      				}
-      				var gmapa = new google.maps.Map(divMapa, objConfig);
-      				var objConfigMarker ={
-      					position:gLatLon,
-      					map:gmapa,
-      					animation: google.maps.Animation.DROP,//Animacion de caida al marker*/
-      					draggable:true,//mover el marker
-      					title:"posicion 1"
-      				}
-      				var gMarker = new google.maps.Marker(objConfigMarker);
-
-      				//NUEVOOO!!
-      				//Para crear un modal de informacion
-      				var objHTML = {
-      					content: '<div style="height: 15opx; width:300px"><h2>Mi posicion</h2><h3>Cambiar la imagen del marker , pendiente</h3><p>Informate <a href="https://www.youtube.com/watch?v=lRbRZxdONoA"/></p></div>'
-      				}
-      				var gIW = new google.maps.InfoWindow(objHTML);
-      				//darle un evento onclick al marker
-      				google.maps.event.addListener(gMarker, 'click' , function(){
-      					gIW.open(gmapa, gMarker);
-      				});
-      				//CREAR UN PANORAMA AUTO(pendiente)
-
-      				//PARTE OTRA UBICACION
-      				var gCoder = new google.maps.Geocoder();
-      				var objInformacion = {
-      					address: '12 de Noviembre, Cercado de Lima , Peru'
-      				}
-      				gCoder.geocode(objInformacion, fn_coder);
-
-      				function fn_coder(datos){
-      					var coordenadas = datos[0].geometry.location;
-      					var config  = {
-      						map:gmapa,
-      						position: coordenadas,
-      						title: 'Escuela Davinci'
-      					}
-      					var gMarkerDV = new google.maps.Marker(config);
-      					//gMarkerDV.setIcon('icon_edificio.png');
-      				}
-      				//SOLO COORD
-      				//divMapa.innerHTML = lat+','+lon;
-      				//MAPA ESTATIC
-      				//var coordenadas=lat+','+lon;
-      				
-      				//divMapa.innerHTML='<img src="http://maps.googleapis.com/maps/api/staticmap?size=700x400&markers=color:blue|label:Y|'+coordenadas+'"/>';
-
-                              //OTRO MAPA
-                              var mapa2 = new google.maps.Map(document.getElementById('mp'),{
+                  function myfunction(long,lati,id){
+                        var mapa2 = new google.maps.Map(document.getElementById('mp'),{
                                     center:{
-                                          lat:27.72,
-                                          lng:85.36
+                                          lat:lati,
+                                          lng:long
 
                                     },
                                     zoom:15
                               });
+
                               var marker2 = new google.maps.Marker({
                                     position:{
-                                          lat:27.72,
-                                          lng:85.36
+                                          lat:lati,
+                                          lng:long
 
                                     },
+                                    animation: google.maps.Animation.DROP,
                                     map:mapa2,
+                                    draggable:true,
+                                    title:"posicion incidente"
+                              });
+
+                              
+                              //NUEVOOO!!
+                              //Para crear un modal de informacion
+                              @foreach ($incidentes as $inc)
+                              if ({{ $inc->id }} == id) {
+
+                              var objHTML = {
+                                    content: '<div style="height: 15opx; width:300px"><h4>Incidente Nro'+id+'</h4><p>Informate del incidente : <button id="btn1"><a href="{{URL::action('MapaController@show',$inc->id )}}" >Detalle</a></button></p></div>'
+                              }
+                              var gIW = new google.maps.InfoWindow(objHTML);
+                              //darle un evento onclick al marker
+                              google.maps.event.addListener(marker2, 'click' , function(){
+                                    gIW.open(mapa2, marker2);
+                              });
+
+                              }
+                              @endforeach
+
+                  }
+/*
+                  //PARA EL MAPA
+                  navigator.geolocation.getCurrentPosition(fn_ok,fn_error);
+
+                  
+                  //var divMApa =$('mapa')
+                  function fn_error(){
+                              divMapa.innerHTML = 'Hubo problema en la solicitud de los datos';
+                  }
+                  */
+                  
+                              
+                              
+                              //SOLO COORD
+                              //divMapa.innerHTML = lat+','+lon;
+                              //MAPA ESTATIC
+                              //var coordenadas=lat+','+lon;
+                              
+                              //divMapa.innerHTML='<img src="http://maps.googleapis.com/maps/api/staticmap?size=700x400&markers=color:blue|label:Y|'+coordenadas+'"/>';
+
+                              //OTRO MAPA
+                              var mapa = new google.maps.Map(document.getElementById('mp'),{
+                                    center:{
+                                          lat:-12.0562041,
+                                          lng:-77.0868589
+
+                                    },
+                                    zoom:15
+                              });
+                              var marker = new google.maps.Marker({
+                                    position:{
+                                          lat:-12.0562041,
+                                          lng:-77.0868589
+
+                                    },
+                                    map:mapa,
                                     draggable:true
                               });
 
 
                               //PARA EL BUSCADOR
                               var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
-      				//PARA COLOCANDO DEL INPUT NOS APAREZCA EN EL MAPA
-      				google.maps.event.addListener(searchBox,'places_changed',function(){
-      				var places = searchBox.getPlaces();
-      				var bounds = new google.maps.LatLngBounds();
-      				var i ,place;
-      				for (i = 0;place=places[i]; i++) {
-      						bounds.extend(place.geometry.location);
-      						marker2.setPosition(place.geometry.location);
-      					}
-      				mapa2.fitBounds(bounds);
-      				mapa2.setZoom(15);
-      		});
-      		}
+                              //PARA COLOCANDO DEL INPUT NOS APAREZCA EN EL MAPA
+                              google.maps.event.addListener(searchBox,'places_changed',function(){
+                              var places = searchBox.getPlaces();
+                              var bounds = new google.maps.LatLngBounds();
+                              var i ,place;
+                              for (i = 0;place=places[i]; i++) {
+                                          bounds.extend(place.geometry.location);
+                                          marker.setPosition(place.geometry.location);
+                                    }
+                              mapa.fitBounds(bounds);
+                              mapa.setZoom(15);
+                  });
+                  
 
-      		//mostrar_objeto(navigator.geolocation);
+                  //mostrar_objeto(navigator.geolocation);
 
-      		/*function mostrar_objeto(obj){
-      				for (var prop in obj) {
-      					document.write(prop+':'+obj[obj]+'<br>');
-      				}
-      		}*/
-      	</script>
-	  </tr>
+                  /*function mostrar_objeto(obj){
+                              for (var prop in obj) {
+                                    document.write(prop+':'+obj[obj]+'<br>');
+                              }
+                  }*/
 
-	  </table>
+
+                  
+
+            </script>
+        
 
   </div>
   </div>
 </div>
-<?php
+@stop

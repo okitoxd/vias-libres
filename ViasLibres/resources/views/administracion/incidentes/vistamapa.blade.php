@@ -25,7 +25,7 @@
             $formatted_address = ($google_maps_array["results"][0]["formatted_address"]);
       }
 ?>
-  <div class="row">
+<div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="table-responsive" >
       
@@ -64,26 +64,8 @@
                     <li><a href="#">Leve</a></li>
                   </ul>
                   </div>
-                  <div>
-                        <thead>
-                        <th>Id</th>
-                        <th>Latidtud</th>
-                        <th>Longitud</th>
-                        <th>Opcion</th>
-                        </thead>
-                        @foreach ($incidentes as $inc)
-                        <tr>
-                        <td>{{$inc ->id}}</td>
-                        <td>{{$inc ->long_location}}</td>
-                        <td>{{$inc ->lat_location}}</td>
-                        <td>
-                              <a href="#" ><button class="btn btn-danger">Ver mapa</button></a>
-                        </td>
-                        </tr>
-                        @endforeach
-                  </div>
             </table>
-            {{ $incidentes->render() }}
+            
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                   <center><div id="mp" style="width:700px; height:500px">Cargando mapa ... </div></center>
