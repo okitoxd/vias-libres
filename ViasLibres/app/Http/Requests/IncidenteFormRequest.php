@@ -32,6 +32,7 @@ class IncidenteFormRequest extends FormRequest
             'calificationC' =>'max:11', 
             'long_location'=>'required',
             'lat_location'=>'required',
+            'imagen' =>'mimes:jpeg,jpg,bmp,png',
         ];
     }
 }

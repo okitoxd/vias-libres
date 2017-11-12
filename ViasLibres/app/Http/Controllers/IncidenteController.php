@@ -22,29 +22,41 @@ class IncidenteController extends Controller
     {
     	if($request){
     		$query=trim($request->get('searchText'));
-    		$incidentes=DB::table('incident')->where('description','LIKE','%'.$query.'%')
-    		->orderBy('id','desc')
+    		$incidentes=DB::table('incident as i')
+            ->join('incident_status as ic','ic.id','=','i.incident_status')
+            ->select('i.id','i.description','ic.name','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','i.imagen')
+            ->where('i.description','LIKE','%'.$query.'%')
+    		->orderBy('i.id','desc')
     		->paginate(7);
     		return view('administracion.incidentes.index',["incidentes"=>$incidentes,"searchText"=>$query]);
     		/*select('id','name','apellidoPer','dniPer','emailPer','imagenPer')->*/
     	}
     }
 
-    //Aqui hacer funcion para el mapa , ademas crear una vista en administracio/incidentes/mapa
-    //y ahi crear un metodo de busqueda definido para ello
+    
 
-    public function index2(Request $request)//El cuadrado de etexto que escogera
-    {
-        if($request){
-            $query=trim($request->get('searchText'));
-            $incidentes=DB::table('incident')->where('description','LIKE','%'.$query.'%')
-            ->orderBy('id','desc')
-            ->paginate(7);
-            return view('administracion.mapa.index',["incidentes"=>$incidentes,"searchText"=>$query]);
-            /*select('id','name','apellidoPer','dniPer','emailPer','imagenPer')->*/
-        }
+    /*public function create(){
+        $estado=DB::table('categoria')->where('condicion','=','1')->get();
+        return view("administracion.incidente.create",["estado"=>$estado]);
     }
 
+    
+    public function store(IncidenteFormRequest $request){
+        $articulo=new Articulo;
+        $articulo->idcategoria=$request->get('idcategoria');
+        $articulo->codigo=$request->get('codigo');
+        $articulo->nombre=$request->get('nombre');
+        $articulo->stock=$request->get('stock');
+        $articulo->descripcion=$request->get('descripcion');
+        $articulo->estado='Activo';
+        if (Input::hasFile('imagen')) {
+            $file=Input::file('imagen');
+            $file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
+            $articulo->imagen=$file->getClientOriginalName();
+        }
+        $articulo->save();
+        return Redirect::to('almacen/articulo');
+    }*/
 
     public function destroy($id){
 		$incidente=DB::table('incident')->where('id','=',$id)->delete();

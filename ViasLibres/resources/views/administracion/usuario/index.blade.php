@@ -41,7 +41,7 @@
 					<td>{{$usu ->email}}</td>
 					<td>{{$usu ->tipo}}</td>
 					<td>
-						<img src="{{asset('imagenes/personas/'.$usu->imagen)}}"" alt="{{ $usu->name}}" height="100px" width="100px" class="img-thumbnail" >
+						<img src="{{asset('imagenes/personas/'.$usu->imagen)}}" alt="{{ $usu->name}}" height="100px" width="100px" class="img-thumbnail" >
 					</td>
 					<td>
 						<a href="{{URL::action('UsuarioController@edit',$usu->id)}}"><button class="btn btn-info">Editar</button></a>

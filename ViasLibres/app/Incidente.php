@@ -15,7 +15,7 @@ class Incidente extends Model
      * @var array
      */
     protected $fillable = [
-        'description', 'incident_status', 'user_id', 'calificationA', 'calificationB', 'calificationC','long_location','lat_location'
+        'description', 'incident_status', 'user_id', 'calificationA', 'calificationB', 'calificationC','long_location','lat_location','imagen'
     ];
 
     /**

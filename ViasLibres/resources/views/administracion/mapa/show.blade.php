@@ -70,7 +70,6 @@
  						<th>Calificacion C</th>
  						<th>Longitud</th>
  						<th>Latitud</th>
- 						<th>Folder</th>
  						<th>Foto</th>
  					</thead>
  					
@@ -79,16 +78,16 @@
  						<tr>
  							<td>{{$det->id}}</td>
  							<td>{{$det->description}}</td>
- 							<td>{{$det->incident_status}}</td>
+ 							<td>{{$det->name}}</td>
  							<td>{{$det->user_id}}</td>
  							<td>{{$det->calificationA}}</td>
  							<td>{{$det->calificationB}}</td>
  							<td>{{$det->calificationC}}</td>
  							<td>{{$det->long_location}}</td>
  							<td>{{$det->lat_location}}</td>
- 							<td>{{$det->folder}}</td>
  							<td>
- 								<img src="{{asset('imagenes/extras/'.$det->name)}}" alt="{{ $det->name}}" height="100px" width="100px" class="img-thumbnail" >
+ 								<img src="{{asset('../imagenes/extras/'.$det->imagen)}}" alt="{{ $det->imagen}}" height="100px" width="100px" class="img-thumbnail" >
+
  							</td>
  						</tr>
  						@endforeach

@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Cornford\Googlmapper\Facades\MapperFacade;
 use Illuminate\Support\Facades\Route;
 use ViasLibres\Http\Requests\IncidenteFormRequest;
-use ViasLibres\Http\Requests\ImagesFormRequest;
 use ViasLibres\Incidente;
-use ViasLibres\Images;
 use DB;
 
 
@@ -46,10 +44,10 @@ class MapaController extends Controller
                 ->first();
 
                 $detalles=DB::table('incident as i')
-                ->join('images as im','i.id','=','im.incident_id')
-                ->select('i.id','i.description','i.incident_status','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','im.folder','im.name')
+                ->join('incident_status as ic','ic.id','=','i.incident_status')
+                ->select('i.id','i.description','ic.name','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','i.imagen')
                 ->where('i.id','=',$id)
-                ->groupBy('i.id','i.description','i.incident_status','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','im.folder','im.name')
+                ->groupBy('i.id','i.description','ic.name','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','i.imagen')
                 ->get();
 
                 return view("administracion.mapa.show",["incidentes"=>$incidentes,"detalles"=>$detalles]);

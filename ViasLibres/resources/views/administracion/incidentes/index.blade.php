@@ -39,7 +39,7 @@
 				<tr>
 					<td>{{$inc ->id}}</td>
 				    <td>{{$inc ->description}}</td>
-				    <td>{{$inc ->incident_status}}</td>
+				    <td>{{$inc ->name}}</td>
 					<td>{{$inc ->user_id}}</td>
 					<td>{{$inc ->calificationA}}</td>
 					<td>{{$inc ->calificationB}}</td>
