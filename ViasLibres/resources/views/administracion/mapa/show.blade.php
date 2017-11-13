@@ -2,6 +2,7 @@
 @section ('contenido')
 
 <h1>Incidente # {{$incidentes->id}}</h1>
+<!--
 <div class="row">
  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
  	<div class="form-group">
@@ -21,24 +22,7 @@
  		<p>{{$incidentes->user_id}}</p>
  	</div>
  </div>
-  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
- 	<div class="form-group">
- 		<label>Calificacion A</label>
- 		<p>{{$incidentes->calificationA}}</p>
- 	</div>
- </div>
- <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
- 	<div class="form-group">
- 		<label>Calificacion B</label>
- 		<p>{{$incidentes->calificationB}}</p>
- 	</div>
- </div>
- <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
- 	<div class="form-group">
- 		<label>Calificacion C</label>
- 		<p>{{$incidentes->calificationC}}</p>
- 	</div>
- </div>
+  
  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
  	<div class="form-group">
  		<label>Longitud</label>
@@ -53,36 +37,32 @@
  </div>
  </div>
  
-
- <div class="row">
+-->
+ <div class="row" >
  	<div class="panel panel-primary">
  		<div class="panel-body">
  			
  			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
- 				<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+ 				<table id="detalles" class="table table-striped table-bordered table-condensed table-hover" >
  					<thead style="background-color:#A9D0F5">
  						<th>Id</th>
  						<th>Descripcion</th>
  						<th>Estado incidente</th>
  						<th>Usuario ID</th>
- 						<th>Calificacion A</th>
- 						<th>Calificacion B</th>
- 						<th>Calificacion C</th>
+ 						
  						<th>Longitud</th>
  						<th>Latitud</th>
  						<th>Foto</th>
  					</thead>
  					
- 					<tbody>
+ 					<tbody >
  						@foreach($detalles as $det)
  						<tr>
  							<td>{{$det->id}}</td>
  							<td>{{$det->description}}</td>
  							<td>{{$det->name}}</td>
  							<td>{{$det->user_id}}</td>
- 							<td>{{$det->calificationA}}</td>
- 							<td>{{$det->calificationB}}</td>
- 							<td>{{$det->calificationC}}</td>
+ 							
  							<td>{{$det->long_location}}</td>
  							<td>{{$det->lat_location}}</td>
  							<td>
@@ -91,8 +71,11 @@
  							</td>
  						</tr>
  						@endforeach
+ 						<div >
+ 						<center><img src="{{asset('../imagenes/extras/'.$det->imagen)}}" alt="{{ $det->imagen}}" height="500px" width="600px" class="img-thumbnail" ></center>
+ 						</div>
  					</tbody>
- 				</table>
+ 					</table>
  			</div>
  		</div>
  	</div>
