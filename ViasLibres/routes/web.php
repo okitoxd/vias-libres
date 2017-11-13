@@ -31,4 +31,5 @@ Route::auth();
 Route::resource('administracion/usuario','UsuarioController');
 Route::resource('administracion/incidentes','IncidenteController');
 Route::resource('administracion/mapa','MapaController');
+Route::resource('administracion/archivados','IncidenteArchivadoController');
 

@@ -51,7 +51,7 @@
                         <td>{{$inc ->long_location}}</td>
                         <td>{{$inc ->lat_location}}</td>
                         <td>
-                              <button class="btn btn-danger" onclick="myfunction({{$inc ->long_location}},{{$inc ->lat_location}},{{$inc ->id}});">Ver mapa</button>
+                              <button class="btn btn-success" onclick="myfunction({{$inc ->long_location}},{{$inc ->lat_location}},{{$inc ->id}});">Ver mapa</button>
                         </td>
                         </tr>
                         @endforeach

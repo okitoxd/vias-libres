@@ -134,17 +134,12 @@
               </ul>-->
             </li>
             <li class="treeview">
-              <a href="#">
+              <a href="{{url('administracion/archivados')}}">
                 <i class="fa fa-files-o"></i>
                 <span>Incidentes archivados</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Incidentes Pendientes</span>
-              </a>
-            </li>
+            
 
             <li class="treeview">
               <a href="{{url('administracion/usuario')}}">

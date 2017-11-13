@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 //use ViasLibres\User;
 use Illuminate\Support\Facades\Redirect;
 use ViasLibres\Http\Requests\IncidenteFormRequest;
+use ViasLibres\Incidente;
 use DB;
 
 class IncidenteController extends Controller
@@ -26,6 +27,7 @@ class IncidenteController extends Controller
             ->join('incident_status as ic','ic.id','=','i.incident_status')
             ->select('i.id','i.description','ic.name','i.user_id','i.calificationA','i.calificationB','i.calificationC','i.long_location','i.lat_location','i.imagen')
             ->where('i.description','LIKE','%'.$query.'%')
+            ->where('i.incident_status','=','2')//Aqui poner en el listado archivados a 1
     		->orderBy('i.id','desc')
     		->paginate(7);
     		return view('administracion.incidentes.index',["incidentes"=>$incidentes,"searchText"=>$query]);
@@ -59,9 +61,13 @@ class IncidenteController extends Controller
     }*/
 
     public function destroy($id){
-		$incidente=DB::table('incident')->where('id','=',$id)->delete();
+		/*$incidente=DB::table('incident')->where('id','=',$id)->delete();*/
+        $incidente=Incidente::findOrFail($id);
+        $incidente->incident_status='1';
+        $incidente->update();
 		return Redirect::to('administracion/incidentes');
 	}
 
+    
 	
 }
